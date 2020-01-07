@@ -91,5 +91,3 @@ fig2 = px.bar(
     color='All.Star',
 )
 fig2.show()
-
-git init
