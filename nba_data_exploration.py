@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib as plt
 import plotly.express as px
 import csv
+import plotly
 '''
     The goal of my project is to find out if the NBA draft is a major determinant of the success of one's career.  In other words
     does a #1 pick in the draft have a better chance, statistically speaking, having a more successful career than someone who was 
@@ -92,3 +93,17 @@ with open('all_stars.html', 'w') as f:
     f.write(fig2.to_html(include_plotlyjs='cdn'))
 
 df1.to_csv(r'C:/Users/Matt/Desktop/unit1project/nba_stats_mod.csv')
+
+df_2016 = pd.read_csv(r'C:/Users/Matt/Desktop/unit1project/2016-2018-all-star.csv')
+
+fig3 = px.bar(
+    df_2016,
+    title = 'All Star Appearences per Draft Pick',
+    x='Draft Pick', 
+    y='All Star Appearences from 2016-2018', 
+    hover_name = 'Player',
+    color = 'Draft Pick'
+)
+
+with open('2016-2018-all-star.html', 'w') as f:
+    f.write(fig3.to_html(include_plotlyjs='cdn'))
