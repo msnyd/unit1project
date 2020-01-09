@@ -2,11 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib as plt
 import plotly.express as px
-import plotly.io as pio
-import plotly.graph_objects as go
-import os
-
-
+import csv
 '''
     The goal of my project is to find out if the NBA draft is a major determinant of the success of one's career.  In other words
     does a #1 pick in the draft have a better chance, statistically speaking, having a more successful career than someone who was 
@@ -26,7 +22,6 @@ print(df.describe())
 #print(df.isnull().sum())
 
 
-pio.templates.default = "plotly_dark"
 
 
 
@@ -52,7 +47,7 @@ def onesAndZeroes(number):
             return 0
 
 
-#fix the x limit when plotting histograms, 61+ shows undrafted players
+#fix the x limit when plotting histograms, 61+ = undrafted players
 def undrafted(numbers): 
     for i in range(1, 3960):
         if numbers > 60:
@@ -76,18 +71,24 @@ fig1 = px.bar(
     y='Appeared_As_All_Star', 
     hover_name = 'Player', 
     color='All.Star',
-) 
-
+)
 # unweighted graph to show the amount of times each pick made it to an all star game
-fig1.show()
-
 
 fig2 = px.bar(
     df1,
     title = 'All Star Appearences per Draft Pick',
     x='Pick', 
     y='All.Star', 
-    hover_name = 'Player', 
+    hover_name = 'Player',
     color='All.Star',
 )
-fig2.show()
+
+
+#writing graphs to html
+with open('unweighted_all_stars.html', 'w') as f:
+    f.write(fig1.to_html(include_plotlyjs='cdn'))
+
+with open('all_stars.html', 'w') as f:
+    f.write(fig2.to_html(include_plotlyjs='cdn'))
+
+df1.to_csv(r'C:/Users/Matt/Desktop/unit1project/nba_stats_mod.csv')
