@@ -14,7 +14,7 @@ import plotly
 '''
 
 #data file
-df = pd.read_csv(r'C:\\Users\\Matt\\Desktop\\unit1project\\1976_to_2015_Draftees.csv')
+df = pd.read_csv(r'https://raw.githubusercontent.com/msnyd/unit1project/master/1976_to_2015_Draftees.csv')
 
 pd.set_option('display.max_columns', None)
 #print(df)
