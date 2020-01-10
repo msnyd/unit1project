@@ -17,20 +17,8 @@ import plotly
 df = pd.read_csv(r'https://raw.githubusercontent.com/msnyd/unit1project/master/1976_to_2015_Draftees.csv')
 
 pd.set_option('display.max_columns', None)
-#print(df)
-print(df.describe())
-#print(df['All.Star'].value_counts())
-#print(df.isnull().sum())
 
 
-
-
-
-# fig = px.bar(df, x='Pk', y='All.Star', hover_name = 'Player', color='All.Star')
-# fig.show()
-
-# figScatt = px.scatter(df, x='Pk', y='Points.per.Game', hover_name = 'Player', hover_data = 'Draft_Yr')
-# figScatt.show()
 
 '''
     What I want to do now is to convert all the people who have recieved an All Star appearence to 1.  This
@@ -40,30 +28,9 @@ print(df.describe())
 
 #this function will go into a column (in this case the All Star column) and change people who have gotten an all star appearence and chamge that to one and leave the rest as 0
 
-def onesAndZeroes(number): 
-    for i in range(1, 3960):
-        if number >= 1:
-            return 1
-        if number == 0:
-            return 0
 
+df1 = pd.read_csv('https://raw.githubusercontent.com/msnyd/unit1project/master/nba_stats_mod.csv')
 
-#fix the x limit when plotting histograms, 61+ = undrafted players
-def undrafted(numbers): 
-    for i in range(1, 3960):
-        if numbers > 60:
-            numbers = 61
-            return numbers
-        if numbers < 60:
-            numbers = numbers
-            return numbers
-
-
-df1 = df.copy()
-df1['Appeared_As_All_Star'] = df1['All.Star'].apply(onesAndZeroes)
-df1['Pick'] = df1['Pk'].apply(undrafted)
-
-#print(df1.describe())
 
 fig1 = px.bar(
     df1,
@@ -85,16 +52,16 @@ fig2 = px.bar(
 )
 
 
-#writing graphs to html
+#writing graphs to html to use for website
 with open('unweighted_all_stars.html', 'w') as f:
     f.write(fig1.to_html(include_plotlyjs='cdn'))
 
 with open('all_stars.html', 'w') as f:
     f.write(fig2.to_html(include_plotlyjs='cdn'))
 
-df1.to_csv(r'C:/Users/Matt/Desktop/unit1project/nba_stats_mod.csv')
+#df1.to_csv(r'C:/Users/Matt/Desktop/unit1project/nba_stats_mod.csv')
 
-df_2016 = pd.read_csv(r'C:/Users/Matt/Desktop/unit1project/2016-2018-all-star.csv')
+df_2016 = pd.read_csv(r'https://raw.githubusercontent.com/msnyd/unit1project/master/2016-2018-all-star.csv')
 
 fig3 = px.bar(
     df_2016,
