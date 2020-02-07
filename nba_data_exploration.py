@@ -71,6 +71,7 @@ fig3 = px.bar(
     hover_name = 'Player',
     color = 'Draft Pick'
 )
-
+fig3.show()
+fig1.show()
 with open('2016-2018-all-star.html', 'w') as f:
     f.write(fig3.to_html(include_plotlyjs='cdn'))
